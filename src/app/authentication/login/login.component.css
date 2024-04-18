@@ -1,0 +1,113 @@
+
+.childDiv {
+    width: 49.5%;
+    padding: 5%;
+}
+.left { float: left; 
+    padding: 0%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border:  solid rgb(247, 244, 244) 2px;
+}
+.right{ float: right; }
+h4{
+    margin: 0%;
+    padding: 0%;
+    color:#204672;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 35px;
+
+}
+div .form-group{
+    margin-bottom: 5%;
+}
+p{
+    font-size: small;
+    opacity: 0.6;
+}
+label{
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-family: '150i',sans-serif;
+    color:#204672;
+}
+input{
+    border: 1px solid #92a7bf;
+    border-radius: 6px;
+    background-color: transparent;
+    height: auto;
+    resize: none;
+    font-size: 17px;
+    font-family: Muli,sans-serif;
+    color: #204672;
+    font-weight: 400;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    padding-bottom: 0% !important;
+}
+button{
+    width: 100%;
+    background-color:rgb(23, 67, 117);
+}
+.forgetpassword{
+    color: #fc777e !important;
+    font-family: Muli,sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: right;
+    text-decoration: underline;
+    float: right;
+}
+.remeber input{
+    width: auto !important;
+    display: inline;
+    margin-right: 2%;
+}
+.validation{
+    color: #b60e0e !important;
+    padding: 0% !important;
+}
+.orsocial{
+    position: relative;
+    padding-top: 3%;
+    text-align: center;
+
+}
+.social-login label{
+    padding: 2%;
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.6;
+}
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+}
+ul li {
+    margin: 2%;
+    font-size: small;
+    padding: 1%;
+    border: solid 1px #3b5999;
+    border-radius: 5px;
+}
+ul li a{
+    text-decoration: none;
+    font-size: small;
+    text-align: center;
+}
+ ul :hover{
+    background-color:#3b5999;
+    text-align: center;
+    color: white;
+    font-size: small;
+ }
+ svg{
+    padding-right: 5px;
+ }

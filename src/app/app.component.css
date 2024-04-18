@@ -1,0 +1,38 @@
+*{
+    background-color: rgb(248, 248, 242); 
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12-column grid system */
+    gap: 20px; /* Adjust gap between sidebar and content */
+    height: auto; /* Adjust height as needed */
+}
+
+.sidebar {
+    grid-column: span 4; /* Occupy 3 columns */
+    background-color: #f4f4f4; /* Example background color for sidebar */
+}
+
+.content {
+    grid-column: span 8; /* Occupy 9 columns */
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Adjust gap between grid items */
+}
+
+.grid-item {
+    background-color: #fff; /* Example background color for grid items */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 8px; /* Add border-radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+

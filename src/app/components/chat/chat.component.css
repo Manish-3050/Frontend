@@ -1,0 +1,28 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.container {
+    display: flex;
+}
+
+.container > div {
+    margin-right: 0px; /* Add spacing between the two divs */
+}
+
+.container > div:last-child {
+    margin-right: 0; /* Remove margin from the last div */
+}
+
+/* .input-group-prepend {
+    position: relative;
+}
+
+.input-group-text {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 2.5rem;
+    text-align: center;
+    pointer-events: none;
+} */

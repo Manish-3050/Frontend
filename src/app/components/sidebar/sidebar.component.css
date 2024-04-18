@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+}
+
+.container > div {
+    margin-right: 20px; /* Add spacing between the two divs */
+}
+
+.container > div:last-child {
+    margin-right: 0; /* Remove margin from the last div */
+}
+.container:hover {
+    background-color: skyblue;
+    border-radius: 5%; /* Change background color on hover */
+    cursor: pointer;
+    transition-duration: 0ms;
+}
+.icon{
+    display: inline-block;
+    margin: 10px 10px 10px 0px;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+}
+.icon-bird{
+    background-image: url("../../../assets/chating.svg");
+}
+
+
+.icon-bird:hover{
+    /* background-color: rgb(20, 115, 198); */
+    background-image: url("../../../assets/chat-left-dots-fill.svg");
+}
+
+.icon-video{
+    background-image: url("../../../assets/camera-video.svg");
+}
+
+
+.icon-video:hover{
+    /* background-color: rgb(20, 115, 198); */
+    background-image: url("../../../assets/camera-video-fill.svg");
+}
+.icon-contact{
+    background-image: url("../../../assets/person-plus.svg");
+}
+
+
+.icon-contact:hover{
+    /* background-color: rgb(20, 115, 198); */
+    background-image: url("../../../assets/person-plus-fill.svg");
+}

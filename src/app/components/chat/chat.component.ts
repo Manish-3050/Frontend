@@ -16,9 +16,11 @@ export class ChatComponent {
   constructor( public contactService: ContactsService){
     this.contactService.currentContact$.subscribe((res)=>{
       // console.log("coming data",res)
-      this.currentContact=res
-      this.getMessages(this.currentContact.id)
-      console.log("this.currentContact",this.currentContact)
+      this.currentContact=res;
+      if(this.currentContact.id!=0){
+        this.getMessages(this.currentContact.id)
+        console.log("this.currentContact",this.currentContact)
+      }
     })
   
   }

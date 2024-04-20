@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ContactsService } from '../../services/contacts.service';
 import { contacts } from 'src/app/models/model';
+import { userDatatype } from 'src/app/models/model';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -8,11 +10,19 @@ import { contacts } from 'src/app/models/model';
 })
 export class SidebarComponent {
   public contacts:any=[]
+  public userData:userDatatype={ id: 0, firstName: '', lastName: '',avtar:'' }
 //  datas=[1,2,3,4,5,6,7,8,9]
- constructor( public contactService: ContactsService){
+ constructor(
+   public contactService: ContactsService,
+   public userService:UserService
+  ){
   this.contactService.getContacts().subscribe((res:any)=>{
     console.log("response ",res)
     this.contacts=res.data
+  })
+  this.userService.userData$.subscribe((res:userDatatype)=>{
+    this.userData=res
+    console.log("sidebar component user data",this.userData)
   })
 
 }

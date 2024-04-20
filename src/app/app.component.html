@@ -1,10 +1,15 @@
 <div class="row">
-    <div class="col-3">
-        <app-sidebar></app-sidebar>
-    </div>
-    <div class="col-9">
-        <app-chat></app-chat>
-    </div>
+    <ng-container *ngIf="user.id==0">
+        <app-login></app-login>
+    </ng-container>
+    <ng-container *ngIf="user.id!=0">
+        <div class="col-3">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-9">
+            <app-chat></app-chat>
+        </div>
+    </ng-container>
   </div>
         <!-- <div class="container" style="width: 100%;">
             <div class="sidebar">

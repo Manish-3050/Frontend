@@ -1,34 +1,49 @@
-<!-- <div class="parentDiv">
+<div class="parentDiv" style="height: 100vh;">
   <div class="childDiv left">
+    <img src="../../../assets/login.svg" alt="image">
+  </div>
+  <div class="childDiv right">
     <h4>Log-In</h4>
     <p>Log in to your account to order your Pizzas from PizzaBazzar</p>
-    <form (ngSubmit)="onSubmit(heroForm)" #heroForm="ngForm">
+    <form (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm">
       <div class="form-group">
-        <label for="name">MobileNumber*</label>
+
+        <!-- <label for="name">MobileNumber*</label>
         <input type="text" class="form-control" id="name" required [ngModel]="usernamemm" name="mobileNumber"
           #username="ngModel" (keyup)="usernameValidate(username.value,'username')">
         <div>
           <span class="validation" [hidden]="validform">
             Please enter your MobileNumber
           </span>
+        </div> -->
+        <label for="exampleInputEmail1" >Username or email</label>            
+        <input type="text" class="form-control" id="name"  placeholder="User Name or Email" autocomplete="off" type="text" name="email" #email="ngModel" [ngModel]="usernameValue" trim required >
+        <div class="form-text text-danger"
+          *ngIf="email.errors?.['required'] && !email.errors?.['email'] && (email.touched || f.submitted)">
+           Required
         </div>
       </div>
 
 
       <div class="form-group">
-        <label for="email">Password</label>
-        <input type="password" class="form-control" id="email" [ngModel]="passwordmm" #password="ngModel"
-          name="password" required (keyup)="usernameValidate(password.value,'password')">
-        <span class="validation" [hidden]="validPassword">
-          Please enter your password
-        </span>
+        <label for="exampleInputPassword1" >Password</label>
+        <input type="password" [class]="password.invalid && (password.touched || f.submitted)? 'form-control border-danger' :'form-control'"  placeholder="Enter your Password"  [type]="password" name="password"
+        #password="ngModel" [ngModel]="passwordValue" trim required >
+        <!-- <img *ngIf="showHidePassword" (click)="showHidepass()" id="confirm_passwordimg"
+        src="../../../assets/images/icn_eye_open.svg" alt="" title="" class="eye current_password eye-open">
+        <img *ngIf="!showHidePassword" (click)="showHidepass()" id="confirm_passwordimg"
+        src="../../../assets/images/icn_eye_close.svg" alt="" title="" class="eye current_password eye-close"> -->
+      <div class="form-text text-danger"
+        *ngIf="password.errors?.['required'] && (password.touched || f.submitted)">
+        Required
+      </div>
       </div>
 
-      <div class="form-group remeber">
+      <!-- <div class="form-group remeber">
         <input type="checkbox" id="Remember_me" value="true" name="remember_me" [ngModel]="remember_me"
           #Remember_me="ngModel">
         <label for="Remember_me">Remember_me</label>
-      </div>
+      </div> -->
       <div class="forgetpassword">
         <a class="forgetpassword" href="www.google.com">Forget password</a>
       </div>
@@ -39,7 +54,7 @@
         <span>or</span>
 
       </div>
-      <label>Log in with your social media account</label>
+      <!-- <label>Log in with your social media account</label>
       <ul>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-facebook"
@@ -65,11 +80,8 @@
             </span>
           </a>
         </li>
-      </ul>
+      </ul> -->
 
     </div>
   </div>
-  <div class="childDiv right">
-    <img src="../assets/foodorder.png" alt="image">
-  </div>
-</div> -->
+</div>

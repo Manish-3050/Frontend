@@ -44,9 +44,15 @@
 .icon-contact{
     background-image: url("../../../assets/person-plus.svg");
 }
-
+.icon-group{
+    background-image: url("../../../assets/people.svg");
+}
 
 .icon-contact:hover{
     /* background-color: rgb(20, 115, 198); */
     background-image: url("../../../assets/person-plus-fill.svg");
+}
+.icon-group:hover{
+    /* background-color: rgb(20, 115, 198); */
+    background-image: url("../../../assets//people-fill.svg");
 }

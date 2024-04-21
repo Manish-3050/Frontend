@@ -56,3 +56,30 @@
     /* background-color: rgb(20, 115, 198); */
     background-image: url("../../../assets//people-fill.svg");
 }
+
+.menu-container {
+    font-size: 20px;
+}
+
+.menu-toggler{
+    padding: 0px 0px 0px 0px;
+    width: 30px;
+    height: auto;
+    background: red;
+    margin: 14px 10px 0px 0px;
+}
+.menu {
+    width: 160px;
+    margin-top: 10px;
+    position: absolute;
+    background: #fff;
+    color:black;
+    z-index: 10000000;
+}
+.menu-item{
+    padding: 4px 4px 4px 8px;
+    font-size: 16px;
+}
+.menu :hover{
+    background: #a9a9a9;
+}

@@ -19,9 +19,11 @@ export class AppComponent {
     const crendentials:any= localStorage.getItem("userData")
     const localStoragedata=JSON.parse(crendentials)
     console.log("user data from local sstorage",localStoragedata)
-    this.user=localStoragedata
-    if(this.user.id){
-      this.userService.userData$.next( this.user)
+    if(localStoragedata!=null){
+      this.user=localStoragedata
+      if(localStoragedata!=null && this.user.id){
+        this.userService.userData$.next( this.user)
+      }
     }
   }
 }

@@ -28,10 +28,21 @@
             <path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v25.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm0 96c61.9 0 112 50.1 112 112v25.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V208c0-61.9 50.1-112 112-112zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"/></svg>
             <ng-container>
             </ng-container>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="    height:22px;
-            margin: 14px 10px 0px 0px;">
-            <path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>
-            
+            <div class="menu-container">
+                <div class="menu-toggler" (click)="openCloseMenu()"  #toggleButton>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="height:22px">
+                    <path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>
+                </div>
+                    <div class="menu" *ngIf="isMenuOpended"  #menu>
+                        <div class="menu-item">
+                           <img src="../../../assets/people.svg" alt="" style="height: 20px; width: 20px;"> Pofile</div>
+                        <div class="menu-item">
+                          <img src="../../../assets/gear.svg" alt="setting" style="height: 20px; width: 20px;">  Setting</div>
+                        <div class="menu-item" (click)="logout()">
+                            <img src="../../../assets/login-svgrepo-com.svg" alt="logout" style="height: 20px; width: 20px;"> Log-out
+                        </div>
+                    </div>
+            </div>
         </ng-container>
         
     </div>
@@ -79,16 +90,28 @@
                     border-radius: 50%;
                     width: 50px;">
                 </div>
-                <div>
+                <div *ngIf="contact.isGroup">
                     <p style="margin-top: 13px;
                     margin-bottom: 0rem;
                     font-weight: 500;
-                    font-size: 16px;">{{contact.name}} <span style="margin-left: 25px;
-                    margin-bottom: 0rem;
-                    font-weight: 400;
-                    font-size: 12px;">{{contact?.lastMessages?.createdAt | dateAgo}}</span></p>
-                    <!-- <span>{{contact?.lastMessages?.createdAt | dateAgo}}</span> -->
-                    <span style="font-size: 14px;">{{contact?.lastMessages?.content}}</span>
+                    font-size: 16px;">{{contact.name}} 
+                    <span style="margin-left: 25px;margin-bottom: 0rem;font-weight: 400;font-size: 12px;">{{contact?.lastMessages?.createdAt | dateAgo}}</span></p>
+                    <span *ngIf="contact?.lastMessages?.content.length >= 20" style="font-size: 14px;">{{contact?.lastMessages?.content | slice: 0 : 20}}...</span>
+                    <span *ngIf="contact?.lastMessages?.content.length < 20" style="font-size: 14px;">{{contact?.lastMessages?.content}}</span>
+
+                </div>
+
+                <div *ngIf="!contact.isGroup">
+                    <ng-container *ngFor=" let participant of contact.participants">
+                        <p style="margin-top: 13px;
+                        margin-bottom: 0rem;
+                        font-weight: 500;
+                        font-size: 16px;" *ngIf="participant._id!=userData.id">{{participant.firstName}} {{participant.lastName}}
+                        <span style="margin-left: 25px;margin-bottom: 0rem;font-weight: 400;font-size: 12px;">{{contact?.lastMessages?.createdAt | dateAgo}}</span></p>
+                    </ng-container>
+                    <span *ngIf="contact?.lastMessages?.content.length >= 20" style="font-size: 14px;">{{contact?.lastMessages?.content | slice: 0 : 20}}...</span>
+                    <span *ngIf="contact?.lastMessages?.content.length < 20" style="font-size: 14px;">{{contact?.lastMessages?.content}}</span>
+
                 </div>
             </div>
             

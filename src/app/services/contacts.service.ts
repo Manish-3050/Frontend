@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { environment } from 'src/environments/environment.development';
-import { contacts } from '../models/model';
+import { contacts, userDatatype } from '../models/model';
 import { BehaviorSubject, Observable, pluck } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,9 @@ export class ContactsService {
     this.currentContact$ = new BehaviorSubject<contacts>({ id: 0, name: '', image: '',isGroup:false,participants:2 });
 
    }
-   getContacts(){
-    return this.http.get(this.baseUrl + '/contact/list');
+   getContacts(user:any){
+    console.log("mmmmmmmmmmmmmmmmmmmmmmmmm",user)
+    return this.http.get(`${this.baseUrl}/contact/list?userId=${user}`);
   }
   currentContact(data:contacts){
     console.log("current contact is running")

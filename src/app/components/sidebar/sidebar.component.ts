@@ -1,32 +1,56 @@
-import { Component } from '@angular/core';
+import { Component ,Renderer2,ElementRef,ViewChild} from '@angular/core';
 import { ContactsService } from '../../services/contacts.service';
 import { contacts } from 'src/app/models/model';
 import { userDatatype } from 'src/app/models/model';
 import { UserService } from 'src/app/services/user.service';
+import * as Notiflix from 'notiflix';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+'@angular/core';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  @ViewChild('toggleButton')
+  toggleButton!: ElementRef;
+  @ViewChild('menu')
+  menu!: ElementRef;
   public contacts:any=[]
+  public isMenuOpended:boolean=false
   public userData:userDatatype={ id: 0, firstName: '', lastName: '',avtar:'' }
 //  datas=[1,2,3,4,5,6,7,8,9]
  constructor(
    public contactService: ContactsService,
-   public userService:UserService
+   public userService:UserService,
+   private renderer: Renderer2
   ){
-  this.contactService.getContacts().subscribe((res:any)=>{
-    console.log("response ",res)
-    this.contacts=res.data
-  })
   this.userService.userData$.subscribe((res:userDatatype)=>{
     this.userData=res
     console.log("sidebar component user data",this.userData)
   })
 
+
+  //THIS IS TO TOOGLE THE LOGOUT DROPDOWN
+  this.renderer.listen('window', 'click',(e:Event)=>{
+    if( this.isMenuOpended){
+      console.log("kuch to grbr hai re baba")
+      if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
+          this.isMenuOpended=false;
+      }
+    }
+});
 }
 
+ngOnInit(){
+  const crendentials:any= localStorage.getItem("userData")
+  const localStoragedata=JSON.parse(crendentials)
+  this.contactService.getContacts(localStoragedata.id).subscribe((res:any)=>{
+    console.log("response ",res)
+    this.contacts=res.data
+  })
+
+}
 setCurrentContact(contact:any){
   let image='kkkkk'
   console.log("contact",contact)
@@ -44,5 +68,28 @@ setCurrentContact(contact:any){
     participants:contact.participants.length
   }
   this.contactService.currentContact(data)
+}
+openCloseMenu(){
+  console.log("is menu  opended function called")
+  this.isMenuOpended=!this.isMenuOpended
+}
+logout(){
+  Confirm.show(
+    'Logout Confirm',
+    'Are You sure You want to Logout?',
+    'Yes',
+    'No',
+    () => {
+      this.userService.userData$.next({ id: 0, firstName: '', lastName: '',avtar:'' })
+      localStorage.removeItem("userData");
+      this.contactService.currentContact$.next({ id: 0, name: '', image: '',isGroup:false,participants:2 })
+      return
+    },
+    () => {
+    return
+    },
+    {
+    },
+    );
 }
 }

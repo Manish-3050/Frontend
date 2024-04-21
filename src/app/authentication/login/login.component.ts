@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthServiceService } from '../authService/auth-service.service';
 import * as Notiflix from 'notiflix';
 import { UserService } from 'src/app/services/user.service';
+import { ContactsService } from 'src/app/services/contacts.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,26 +21,19 @@ export class LoginComponent {
 usernameValue: any;
 passwordValue: any;
   @ViewChild('f')
-  loginForm!: NgForm;
-  ngOnInit() {
-    // const crendentials:any= localStorage.getItem("remember_meCredentials")
-    // const data=JSON.parse(crendentials)
-    // if(data.remember_me){
-    //   this.usernamemm=data.username
-    //   this.passwordmm=data.password
-    //   this.remember_me=data.remember_me
-    // }
-    // console.log("local storage ",data)
-   }  
+  loginForm!: NgForm;  
    constructor(
     private router: Router,
     private authService:AuthServiceService,
-    private userService:UserService
+    private userService:UserService,
+    private contactsService:ContactsService
   ) {
     // this.authService.getUser().subscribe(res=>{
     //   console.log("data coming",res)
     // })
 
+   }
+   ngOnInit() {
    }
 
   onSubmit(data:NgForm){

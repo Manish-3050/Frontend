@@ -10,7 +10,9 @@ import { BehaviorSubject, Observable, pluck } from 'rxjs';
 export class UserService {
   private baseUrl =`${environment.apiUrl}/api`
   public userData$: BehaviorSubject<userDatatype>;
-  constructor(private http:HttpClient) {
+  constructor(
+  private http:HttpClient,
+  ) {
     this.userData$ = new BehaviorSubject<userDatatype>({ id: 0, firstName: '', lastName: '',avtar:'' });
    }
 

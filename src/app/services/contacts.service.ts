@@ -10,11 +10,10 @@ export class ContactsService {
   private baseUrl =`${environment.apiUrl}/api`
   public currentContact$: BehaviorSubject<contacts>;
   constructor(private http:HttpClient) {
-    this.currentContact$ = new BehaviorSubject<contacts>({ id: 0, name: '', image: '',isGroup:false,participants:2 });
+    this.currentContact$ = new BehaviorSubject<contacts>({ id: 0, name: '', image: '',isGroup:false,participants:2,recievers:[] });
 
    }
    getContacts(user:any){
-    console.log("mmmmmmmmmmmmmmmmmmmmmmmmm",user)
     return this.http.get(`${this.baseUrl}/contact/list?userId=${user}`);
   }
   currentContact(data:contacts){

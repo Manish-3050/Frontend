@@ -5,6 +5,7 @@ import { userDatatype } from 'src/app/models/model';
 import { UserService } from 'src/app/services/user.service';
 import * as Notiflix from 'notiflix';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import {SocketService} from '../../socket/socket.service'
 '@angular/core';
 @Component({
   selector: 'app-sidebar',
@@ -23,6 +24,7 @@ export class SidebarComponent {
  constructor(
    public contactService: ContactsService,
    public userService:UserService,
+   private socketService:SocketService,
    private renderer: Renderer2
   ){
   this.userService.userData$.subscribe((res:userDatatype)=>{
@@ -34,7 +36,6 @@ export class SidebarComponent {
   //THIS IS TO TOOGLE THE LOGOUT DROPDOWN
   this.renderer.listen('window', 'click',(e:Event)=>{
     if( this.isMenuOpended){
-      console.log("kuch to grbr hai re baba")
       if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
           this.isMenuOpended=false;
       }
@@ -46,14 +47,13 @@ ngOnInit(){
   const crendentials:any= localStorage.getItem("userData")
   const localStoragedata=JSON.parse(crendentials)
   this.contactService.getContacts(localStoragedata.id).subscribe((res:any)=>{
-    console.log("response ",res)
     this.contacts=res.data
   })
 
 }
 setCurrentContact(contact:any){
   let image='kkkkk'
-  console.log("contact",contact)
+  console.log("contact setting",contact)
   // This is not correct way to send data and imge please do some modification
   if(!contact.isGroup){
     image=contact.participants[1].avtar //not correct way to send image need to find other way
@@ -65,7 +65,8 @@ setCurrentContact(contact:any){
     name:contact.name,
     image:image,
     isGroup:contact.isGroup,
-    participants:contact.participants.length
+    participants:contact.participants.length,
+    recievers:contact.participants
   }
   this.contactService.currentContact(data)
 }
@@ -82,7 +83,8 @@ logout(){
     () => {
       this.userService.userData$.next({ id: 0, firstName: '', lastName: '',avtar:'' })
       localStorage.removeItem("userData");
-      this.contactService.currentContact$.next({ id: 0, name: '', image: '',isGroup:false,participants:2 })
+      this.contactService.currentContact$.next({ id: 0, name: '', image: '',isGroup:false,participants:2 ,recievers:[]})
+      this.socketService.destroySocket()
       return
     },
     () => {

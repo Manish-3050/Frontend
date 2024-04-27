@@ -4,6 +4,7 @@ export interface contacts {
     image: string;
     isGroup:boolean;
     participants:Number;
+    recievers:Array<any>;
   }
 
   export interface userDatatype {

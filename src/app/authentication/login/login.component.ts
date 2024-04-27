@@ -5,6 +5,7 @@ import { AuthServiceService } from '../authService/auth-service.service';
 import * as Notiflix from 'notiflix';
 import { UserService } from 'src/app/services/user.service';
 import { ContactsService } from 'src/app/services/contacts.service';
+import { SocketService } from 'src/app/socket/socket.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,7 +27,8 @@ passwordValue: any;
     private router: Router,
     private authService:AuthServiceService,
     private userService:UserService,
-    private contactsService:ContactsService
+    private contactsService:ContactsService,
+    private SocketService:SocketService
   ) {
     // this.authService.getUser().subscribe(res=>{
     //   console.log("data coming",res)
@@ -39,8 +41,6 @@ passwordValue: any;
   onSubmit(data:NgForm){
     console.log("data",data)
     console.log("login form",this.loginForm.value)
-    // if(data)
-    // this.userService.userData$.next(userdata)
     this.userService.login(this.loginForm.value).subscribe((res:any)=>{
       console.log("login page hhtp req subscribe",res)
       Notiflix.Notify.success('login Successfully');
@@ -53,61 +53,20 @@ passwordValue: any;
        this.userService.userData$.next(userdata)
        localStorage.removeItem("userData")
        localStorage.setItem("userData",JSON.stringify(userdata))
+      this.SocketService.initSocket(userdata)
     },(err:any)=>{
       Notiflix.Notify.failure(err.error.message);
       console.log("Error while login",err)
     })
-
-
-
-
-  //   this.validform=data.form.touched 
-  //  if(data.valid){
-  //   if(data.value.remember_me){
-  //     const storeCrendials={
-  //       username:data.value.username123,
-  //       password:data.value.password123,
-  //       remember_me:data.value.remember_me
-  //     }
-  //     localStorage.setItem("remember_meCredentials",JSON.stringify(storeCrendials))
-  //   }else{
-  //     const storeCrendials={
-  //       remember_me:data.value.remember_me
-  //     }
-  //     localStorage.removeItem("remember_meCredentials")
-  //     localStorage.setItem("remember_meCredentials",JSON.stringify(storeCrendials))
-  //   }
-  //   // console.log("Login Form Testing successfully passed")
-  //   // this.authService.getUser(data.value).subscribe(res=>{
-  //   //   console.log("user credentials",res)
-  //   //    let response=JSON.parse(JSON.stringify(res)); 
-  //   //   if(response.status){
-  //   //     // let data=JSON.parse(res.toString()); 
-  //   //     // console.log("data stringify",data[0].name,data[0].rollno)
-  //   //      this.router.navigate(['/home'])
-  //   //      Notiflix.Notify.success('Welcome To PizzaBazzar');
-  //   //   }else{
-  //   //     Notiflix.Notify.failure(response.msg);
-  //   //     console.log("no response from backend",response.msg)
-  //   //   }
-  //   // })
-
-  //   //logic of backend 
-   
-
-  //   ///
-  //  }else{
-  //   if(data.form.value.username123==undefined || data.form.value.username123==''){
-  //     this.validform=false
-  //   }
-  //   if(data.form.value.password123==undefined||data.form.value.password123==''){
-  //      this.validPassword=false
-  //   }else{
-  //     this.validPassword=true
-  //   }
-  //  }
    
   }
+  // joingroup(){
+  //   this.SocketService.joinGroup()
+  // }
+
+  // sendmsg(){
+  //   this.SocketService.sendNewMessageInGroup('sending msg in Group')
+  // }
 
 
   usernameValidate(username:any, type:any){

@@ -83,3 +83,49 @@
 .menu :hover{
     background: #a9a9a9;
 }
+
+
+.chat-input {
+    width: calc(100% - 20px); /* Adjust width as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Hover state */
+  .chat-input:hover,
+  .chat-input:focus {
+    border-color: #007bff; /* Change color on hover and focus */
+  }
+
+
+  
+.input-container {
+    position: relative;
+}
+
+#searchInput {
+    width: calc(100% - 40px); /* Adjust for button width */
+    height: 12vh;
+    background-color: rgb(219, 242, 250);
+    font-size: 20px;
+    padding-right: 50px; /* Adjust for button width */
+}
+
+#clearButton {
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 60px;
+    cursor: pointer;
+}
+
+#clearButton:hover {
+    color: red; /* Change color on hover if desired */
+}
+  

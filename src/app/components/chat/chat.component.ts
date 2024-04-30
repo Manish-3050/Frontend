@@ -23,6 +23,8 @@ export class ChatComponent {
   @ViewChild('f')
   formMessage!: NgForm;
   // const inputBox = document.getElementById('input-box');
+  @ViewChild('myDiv')
+  myDiv:any
 
   constructor( 
     public contactService: ContactsService,
@@ -34,7 +36,7 @@ export class ChatComponent {
       this.currentContact=res;
       if(this.currentContact.id!=0){
         this.getMessages(this.currentContact.id)
-        console.log("this.currentContact",this.currentContact)
+        console.log("this.currentContact ***********************************",this.currentContact)
       }
     })
     this.userService.userData$.subscribe((res)=>{
@@ -81,6 +83,7 @@ export class ChatComponent {
         // console.log("sending message data values",socketData)
         this.socketService.sendNewMessage(socketData)
         this.messages.push(socketData)
+        this.scrollBottom()
       }
     }else{
       Notiflix.Notify.warning('Please select any chat to send message');
@@ -94,22 +97,26 @@ export class ChatComponent {
     // console.log("messages",chatId)
     this.contactService.getMessages(chatId).subscribe((res:any)=>{
       this.messages=res.data
+      this.scrollBottom()
       console.log("messages of this chat",this.messages)
     })
   }
 
   getNewMessageFromSocket(){
     this.socketService.socketEvents().subscribe((res:any)=>{
-      console.log("getting new message in the chat components ",res)
-      console.log("current contact chek kro",this.currentContact)
       if(this.currentContact?.id && this.currentContact?.id ==res.data.chatId){
         console.log("new message aya hai ",res.data.content)
         this.messages.push(res.data)
+        this.scrollBottom()
         console.log("total message of the group",this.messages)
       }
     })
   }
 //////////////////////////////////////////////////////////////////
-
+scrollBottom(){
+  setTimeout(() => {
+    this.myDiv.nativeElement.scrollTop =this.myDiv.nativeElement.scrollHeight
+  }, 100);
+}
 
 }

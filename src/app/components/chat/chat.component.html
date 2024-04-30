@@ -70,8 +70,7 @@
         </div>
 
     </div>
-
-    <div style="height: 70vh; overflow-y: auto;">
+    <div style="height: 70vh; overflow-y: auto;" #myDiv>
         <div *ngFor="let message of messages" style="margin-bottom: 5px;" #messageContainer>
             <div class="container" *ngIf="message?.senderDetails?._id != userId" style="max-width: 40vw; overflow: visible; margin-left: 10px;">
                 <img [src]="message.senderDetails.avtar" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">

@@ -119,4 +119,24 @@ scrollBottom(){
   }, 100);
 }
 
+onChange(data:any){
+  console.log("-------------",data.target?.files[0])
+
+  const formData = new FormData();  
+        
+  // Store form name as "file" with file data 
+  formData.append("file", data.target?.files[0], data.target?.files[0].name);
+  console.log("pppppppppppppppp",formData)
+}
+pushNotification(){
+  Notification.requestPermission().then(perm=>{
+    // alert('request permission')
+    if(perm=='granted'){
+      console.log("new notification")
+
+      new Notification('this is it')
+    }
+  })
+}
+
 }

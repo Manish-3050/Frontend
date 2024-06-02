@@ -11,6 +11,26 @@
         </div>
     </ng-container>
   </div>
+  <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
+
+  <ng-template #videocallModal let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+		<!-- <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button> -->
+	</div>
+  <div class="call-img-incomming-call">
+    M P
+</div>
+<h4 style="text-align: center;
+padding: 10px;">Manish Kumar</h4>
+
+<p style="    margin-top: 0;
+margin-bottom: 1rem;
+text-align: center;">incoming call...</p>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+	</div>
+</ng-template>
         <!-- <div class="container" style="width: 100%;">
             <div class="sidebar">
                 <app-sidebar></app-sidebar>

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from './services/user.service';
 import { userDatatype } from './models/model';
 import { SocketService } from './socket/socket.service';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,10 +11,13 @@ import { SocketService } from './socket/socket.service';
 })
 export class AppComponent {
   title = 'Foodordering';
+  @ViewChild('videocallModal') videocallModal: NgbModal | undefined;
+
   public user:userDatatype={ id: 0, firstName: '', lastName: '',avtar:'' }
   constructor(
     private userService:UserService,
-    private socketService:SocketService
+    private socketService:SocketService,
+    private modalService: NgbModal,
   ){
     this.userService.userData$.subscribe((res)=>{
       this.user=res
@@ -29,4 +34,7 @@ export class AppComponent {
       }
     }
   }
+  open() {
+		this.modalService.open(this.videocallModal);
+	}
 }

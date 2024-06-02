@@ -16,6 +16,9 @@ import { SignupRoutingModule } from './authentication/signup/signup.routes.modul
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +31,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     NgMultiSelectDropDownModule,
     NgxSliderModule,
     AppRoutingModule,
@@ -38,7 +42,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     BrowserAnimationsModule,
     SignupRoutingModule
     ],
-  providers: [],
+  providers: [NgbModalConfig, NgbModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

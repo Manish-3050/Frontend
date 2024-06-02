@@ -6,6 +6,8 @@ import * as Notiflix from 'notiflix';
 import { UserService } from 'src/app/services/user.service';
 import { ContactsService } from 'src/app/services/contacts.service';
 import { SocketService } from 'src/app/socket/socket.service';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +15,6 @@ import { SocketService } from 'src/app/socket/socket.service';
 })
 
 export class LoginComponent {
-
   public validform=true
   public validPassword=true
   public usernamemm: any;
@@ -28,7 +29,9 @@ passwordValue: any;
     private authService:AuthServiceService,
     private userService:UserService,
     private contactsService:ContactsService,
-    private SocketService:SocketService
+    private SocketService:SocketService,
+    private modalService: NgbModal,
+
   ) {
     // this.authService.getUser().subscribe(res=>{
     //   console.log("data coming",res)
@@ -37,6 +40,7 @@ passwordValue: any;
    }
    ngOnInit() {
    }
+
 
   onSubmit(data:NgForm){
     console.log("data",data)

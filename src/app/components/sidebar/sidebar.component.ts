@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import * as Notiflix from 'notiflix';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { SocketService } from '../../socket/socket.service'
+import { NgForm } from '@angular/forms';
 '@angular/core';
 @Component({
   selector: 'app-sidebar',
@@ -18,10 +19,14 @@ export class SidebarComponent {
   @ViewChild('menu')
   menu!: ElementRef;
   public contacts: any = []
+  public searchUsers: any = []
   public isMenuOpended: boolean = false
   public openSearchBox:boolean=false
   public userData: userDatatype = { id: 0, firstName: '', lastName: '', avtar: '' }
   //  datas=[1,2,3,4,5,6,7,8,9]
+  @ViewChild('f')
+  searchForm!: NgForm; 
+  searchValue:any
   constructor(
     public contactService: ContactsService,
     public userService: UserService,
@@ -124,5 +129,18 @@ export class SidebarComponent {
 
       }
     })
+  }
+  onSubmit(data:any){
+    console.log("input box data",this.searchForm.value)
+
+    if(!this.searchForm.value.searchKey){
+      Notiflix.Notify.warning("please enter value")
+    }else{
+      this.userService.searchUser(this.searchForm.value.searchKey).subscribe((res:any)=>{
+        console.log("searched user is ",res)
+        this.searchUsers=res.data.users
+        this.searchForm.value.searchKey=''
+      })
+    }
   }
 }

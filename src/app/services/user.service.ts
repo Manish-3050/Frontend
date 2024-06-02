@@ -19,4 +19,9 @@ export class UserService {
    login(data:any){
     return this.http.post(this.baseUrl + '/user/login',data);
   }
+
+  searchUser(data:any){
+    // return this.http.get(this.baseUrl + '/user/searchUser?search=',data);
+    return this.http.get(`${this.baseUrl}/user/searchUser?search=${data}`)
+  }
 }

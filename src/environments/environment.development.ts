@@ -1,4 +1,4 @@
 export const environment = {
     production:true,
-    apiUrl:'http://localhost:7008'
+    apiUrl:'https://backend-peach-nine.vercel.app'
 };

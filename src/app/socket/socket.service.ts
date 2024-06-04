@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io } from 'socket.io-client';
+import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
   public socket: any;
    granted = false;
-  baseUrl = 'http://localhost:3000';
+  baseUrl = `${environment.apiUrl}`;  
   constructor() {
     // this.initSocket('manish')
 

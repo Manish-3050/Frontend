@@ -29,7 +29,7 @@ if (Notification.permission === 'granted') {
       'reconnectionDelayMax': 5000,
       'reconnectionAttempts': Infinity,
       transports: ["websocket", "polling"],
-      withCredentials: true
+      withCredentials: true,
       secure: true
     });
     this.socket.on('connect', (data:any) => {

@@ -1,4 +1,4 @@
 export const environment = {
     production:true,
-    apiUrl:'http://talentchat.online'
+    apiUrl:'https://talentchat.online'
 };
